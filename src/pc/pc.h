@@ -1,3 +1,4 @@
+
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 #ifndef PC_PC_H
 #define PC_PC_H
@@ -36,6 +37,7 @@ typedef union SDL_Event SDL_Event;
 void pc_keyboard_event(const SDL_Event* e);
 void pc_keyboard_apply(void);
 int pc_get_key_binding(int slot);
+int pc_set_key_binding(int slot, int scancode);
 void pc_touch_apply(void);
 
 /* GameCube adapter (WUP-028) read directly for raw 8-bit values
@@ -47,7 +49,7 @@ void pc_gcadapter_poll(void);
 void pc_gcadapter_apply(void); /* main-thread publication to virtual pads */
 struct PADStatus;
 bool pc_gcadapter_status(int port, struct PADStatus* out);
-/* HUD snapshot: raw[6] = stick x,y  c-stick x,y  L R as the adapter reports
+/* HUD snapshot: raw[6] = stick x,y c-stick x,y L R as the adapter reports
  * them (0-255). Returns false when no controller is in that slot. Safe from
  * any thread. */
 bool pc_gcadapter_raw(int port, uint8_t raw[6], bool* wireless);
